@@ -6,7 +6,7 @@
 #    By: ikarjala <ikarjala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 16:57:32 by ikarjala          #+#    #+#              #
-#    Updated: 2022/06/30 18:28:17 by ikarjala         ###   ########.fr        #
+#    Updated: 2022/06/30 22:00:07 by ikarjala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ main
 
 ROOT		= ./
 SRC_DIR		= $(ROOT)src/
-OBJ_DIR		= $(ROOT)obj
+OBJ_DIR		= $(ROOT)
 SRC			= $(addprefix $(SRC_DIR),$(addsuffix .c,$(CFUNC)))
 OBJ			= $(addprefix $(OBJ_DIR),$(addsuffix .o,$(CFUNC)))
 INC_DIR		= $(SRC_DIR)
@@ -28,32 +28,26 @@ CFLAGS		= -Wall -Wextra -Werror
 DEBUG_FLAGS	= $(CFLAGS) -Wimplicit -Wconversion -g -fsanitize=address
 CC			= clang
 
-.PHONY: clean lclean fclean re install
+.PHONY: clean fclean re
 
 ##	BUILD ====
 all: $(NAME)
-$(NAME): lib
+$(NAME):
 	@echo	$(BMSG_BIN)
 	$(CC) -c $(CFLAGS) $(SRC) $(CMD_INC)
 	$(CC) -o $(BIN) $(OBJ)
 	@echo	$(BMSG_FIN)
-lib:
-	make -C $(LIB_DIR)	all
 install: re clean
-debug: lib
+debug:
 	@echo	$(BMSG_DBG)
 	$(CC) -o $(BIN) $(DEBUG_FLAGS) $(SRC) $(CMD_INC) \
-		-L$(LIB_DIR) -l $(LIB)
 	@echo	$(BMSG_FIN)
 
 ##	CLEANUP ====
 clean:
 	rm -f $(OBJ)
-	make -C $(LIB_DIR)	clean
-fclean: clean lclean
+fclean: clean
 	rm -f $(BIN)
-lclean: clean
-	make -C $(LIB_DIR)	fclean
 re: fclean all
 
 BMSG_BIN	= '$(COL_HL)' '$(NAME) :: Starting build...' '$(COL_NUL)'

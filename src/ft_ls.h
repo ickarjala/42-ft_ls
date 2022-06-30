@@ -6,7 +6,7 @@
 /*   By: ikarjala <ikarjala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:22:17 by ikarjala          #+#    #+#             */
-/*   Updated: 2022/06/30 19:15:53 by ikarjala         ###   ########.fr       */
+/*   Updated: 2022/06/30 21:28:56 by ikarjala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,9 @@
 # include <sys/xattr.h>
 
 # define XC_ERROR	-1
+
+# define FD_IN	0
+# define FD_OUT	1
+# define FD_ERR	2
 
 #endif

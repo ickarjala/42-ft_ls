@@ -6,14 +6,15 @@
 /*   By: ikarjala <ikarjala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:23:07 by ikarjala          #+#    #+#             */
-/*   Updated: 2022/06/30 19:26:44 by ikarjala         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:02:21 by ikarjala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	parse_flags(const char **argv)
+int	parse_flags(char **argv)
 {
+	argv = NULL; //DEBUG
 	return (0);
 /* 	const char		shortflags[] = "halRrt";
 	unsigned int	ai;
@@ -31,8 +32,8 @@ int	parse_flags(const char **argv)
 
 int	main(int argc, char **argv)
 {
-	DIR	*dir_p;
-	DIR	*entry;
+	DIR				*dir_p;
+	struct dirent	*entry;
 
 	parse_flags(argv);
 	if (argc == 1)
@@ -43,7 +44,7 @@ int	main(int argc, char **argv)
 			return (XC_ERROR);
 		while ((entry = readdir(dir_p)) != NULL)
 		{
-			write(FD_OUT, entry->name, entry->d_namelen);
+			write(FD_OUT, entry->d_name, entry->d_namlen);
 			write(FD_OUT, "\n", 1);
 		}
 		closedir(dir_p);
